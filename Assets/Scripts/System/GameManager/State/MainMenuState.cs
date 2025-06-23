@@ -27,6 +27,12 @@ namespace BullBrukBruker
                     yield break;
                 }
 
+                if (LevelManager.Instance.IsLoading)
+                {
+                    context.ChangeState(GameStateID.Load);
+                    yield break;
+                }
+
                 if (selectLevelPredicate.Evaluate())
                 {
                     context.ChangeState(GameStateID.SelectLevel);

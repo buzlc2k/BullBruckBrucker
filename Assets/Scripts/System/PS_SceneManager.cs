@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -25,11 +24,11 @@ namespace BullBrukBruker
             yield return null;
         }
 
-        private void OnSceneLoaded(Scene scene, LoadSceneMode mode) => ResetLoading();
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode) => IsLoading = false;
 
         public IEnumerator LoadScene(int index, float offsetTime = 0)
         {
-            SetLoading();
+            IsLoading = true;
             float currentTime = 0;
             while (currentTime <= offsetTime)
             {
@@ -44,7 +43,7 @@ namespace BullBrukBruker
 
         public IEnumerator LoadScene(string name, float offsetTime = 0)
         {
-            SetLoading();
+            IsLoading = true;
             float currentTime = 0;
             while (currentTime <= offsetTime)
             {
@@ -56,8 +55,5 @@ namespace BullBrukBruker
             while (!reloadAsync.isDone)
                 yield return null;
         }
-
-        public void SetLoading() => IsLoading = true;
-        public void ResetLoading() => IsLoading = false;
     }
 }

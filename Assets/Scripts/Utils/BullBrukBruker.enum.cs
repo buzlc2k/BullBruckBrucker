@@ -64,6 +64,9 @@ namespace BullBrukBruker
         ContinueButton_Clicked,
         OutOfBalls,
         OutOfCells,
+        OutOfLevels,
         ReplayButton_Clicked,
+        HomeButton_Clicked,
+        NextLevelButton_Clicked,
     }
 }

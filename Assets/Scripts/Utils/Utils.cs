@@ -173,7 +173,7 @@ namespace BullBrukBruker
         {
             var inDirection = bounceDir;
             var inNormal = GetCollisionNormal(bouncePos, staticObjectPos, staticObjectWidth, staticObjectHeight);
-
+            
             return Vector3.Reflect(inDirection, inNormal);
         }
 

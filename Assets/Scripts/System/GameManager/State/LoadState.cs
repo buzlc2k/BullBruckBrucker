@@ -14,7 +14,7 @@ namespace BullBrukBruker
         {
             yield return gameManager.StartCoroutine(base.UpdateState());
 
-            while (PS_SceneManager.Instance.IsLoading)
+            while (PS_SceneManager.Instance.IsLoading || LevelManager.Instance.IsLoading)
                 yield return null;
                 
             switch (gameManager.PreviousStateID)

@@ -451,7 +451,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &108282535
 Transform:
   m_ObjectHideFlags: 0
@@ -656,6 +656,7 @@ GameObject:
   - component: {fileID: 314425813}
   - component: {fileID: 314425812}
   - component: {fileID: 314425811}
+  - component: {fileID: 314425814}
   m_Layer: 5
   m_Name: HomeButton
   m_TagString: Untagged
@@ -765,6 +766,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 314425809}
   m_CullTransparentMesh: 1
+--- !u!114 &314425814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 314425809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c38e763c1f3bd76498b8d31654ffb789, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 314425811}
 --- !u!1 &320593179
 GameObject:
   m_ObjectHideFlags: 0
@@ -1098,7 +1112,7 @@ GameObject:
   m_Component:
   - component: {fileID: 385991764}
   m_Layer: 0
-  m_Name: =====ASync=====
+  m_Name: =====Active=====
   m_TagString: EditorOnly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3567,7 +3581,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &941908086
 Transform:
   m_ObjectHideFlags: 0
@@ -3775,7 +3789,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &995718729
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4023,8 +4037,9 @@ GameObject:
   - component: {fileID: 1073677361}
   - component: {fileID: 1073677360}
   - component: {fileID: 1073677359}
+  - component: {fileID: 1073677362}
   m_Layer: 5
-  m_Name: ContinueButton
+  m_Name: NextLevelButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4132,6 +4147,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1073677357}
   m_CullTransparentMesh: 1
+--- !u!114 &1073677362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073677357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2665113e288e0c14a9aff3abcb87a537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1073677359}
 --- !u!1 &1130050698
 GameObject:
   m_ObjectHideFlags: 0
@@ -4510,6 +4538,7 @@ GameObject:
   - component: {fileID: 1160970252}
   - component: {fileID: 1160970251}
   - component: {fileID: 1160970250}
+  - component: {fileID: 1160970253}
   m_Layer: 5
   m_Name: HomeButton
   m_TagString: Untagged
@@ -4619,6 +4648,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1160970248}
   m_CullTransparentMesh: 1
+--- !u!114 &1160970253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1160970248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c38e763c1f3bd76498b8d31654ffb789, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1160970250}
 --- !u!1 &1161701026
 GameObject:
   m_ObjectHideFlags: 0
@@ -4629,12 +4671,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1161701027}
   m_Layer: 0
-  m_Name: =====Sync=====
+  m_Name: =====DeActive=====
   m_TagString: EditorOnly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1161701027
 Transform:
   m_ObjectHideFlags: 0
@@ -4667,7 +4709,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1186282395
 Transform:
   m_ObjectHideFlags: 0
@@ -5904,7 +5946,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1431519112
 Transform:
   m_ObjectHideFlags: 0
@@ -5945,6 +5987,7 @@ GameObject:
   - component: {fileID: 1439228562}
   - component: {fileID: 1439228561}
   - component: {fileID: 1439228560}
+  - component: {fileID: 1439228563}
   m_Layer: 5
   m_Name: HomeButton
   m_TagString: Untagged
@@ -6054,6 +6097,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1439228558}
   m_CullTransparentMesh: 1
+--- !u!114 &1439228563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439228558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c38e763c1f3bd76498b8d31654ffb789, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1439228560}
 --- !u!1 &1473358694
 GameObject:
   m_ObjectHideFlags: 0
@@ -6070,7 +6126,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1473358695
 Transform:
   m_ObjectHideFlags: 0
@@ -6130,8 +6186,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1161701027}
+  - {fileID: 385991764}
   - {fileID: 531765280}
+  - {fileID: 1161701027}
   - {fileID: 108282535}
   - {fileID: 2107965710}
   - {fileID: 995718729}
@@ -6139,7 +6196,6 @@ Transform:
   - {fileID: 1186282395}
   - {fileID: 1473358695}
   - {fileID: 941908086}
-  - {fileID: 385991764}
   - {fileID: 1712350177}
   - {fileID: 1644772731}
   m_Father: {fileID: 0}
@@ -6295,7 +6351,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1644772729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6908,7 +6964,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1712350177
 Transform:
   m_ObjectHideFlags: 0
@@ -7794,7 +7850,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2107965710
 Transform:
   m_ObjectHideFlags: 0

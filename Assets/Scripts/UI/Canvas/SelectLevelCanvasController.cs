@@ -20,7 +20,7 @@ namespace BullBrukBruker{
         private (int currentHighestLevel, int totalLevel) GetLevelsData()
         {
             //Craft logic
-            int currentHighestLevel = 2;
+            int currentHighestLevel = 1;
             int totalLevel = 50;
 
             return (currentHighestLevel, totalLevel);

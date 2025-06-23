@@ -11,6 +11,7 @@ namespace BullBrukBruker
 
         public int RemainAttemps { get; private set; }
         public int CurrentIndex { get; private set; }
+        public bool IsLoading { get; private set; }
         public PaddelController CurrentPaddle { get; private set; }
         public List<GameObject> CurrentItems { get; private set; }
         public List<GameObject> CurrentBalls { get; private set; }
@@ -18,6 +19,7 @@ namespace BullBrukBruker
         private Action<object> loadHighestLevel;
         private Action<object> reloadLevel;
         private Action<object> loadLevel;
+        private Action<object> loadNextLevel;
 
         private void InitializeDelegate()
         {
@@ -34,6 +36,11 @@ namespace BullBrukBruker
             loadLevel ??= (param) =>
             {
                 LoadLevel((int)param);
+            };
+
+            loadNextLevel ??= (param) =>
+            {
+                LoadNextLevel();
             };
         }
 
@@ -52,7 +59,8 @@ namespace BullBrukBruker
         {
             Observer.AddListener(EventID.PlayButton_Clicked, loadHighestLevel);
             Observer.AddListener(EventID.LevelButton_Clicked, loadLevel);
-            Observer.AddListener(EventID.ReplayButton_Clicked, reloadLevel);
+            Observer.AddListener(EventID.ReplayButton_Clicked, reloadLevel); 
+            Observer.AddListener(EventID.NextLevelButton_Clicked, loadNextLevel);
         }
 
         private void UnRegisterEvent()
@@ -60,11 +68,12 @@ namespace BullBrukBruker
             Observer.RemoveListener(EventID.PlayButton_Clicked, loadHighestLevel);
             Observer.RemoveListener(EventID.LevelButton_Clicked, loadLevel);
             Observer.RemoveListener(EventID.ReplayButton_Clicked, reloadLevel);
+            Observer.RemoveListener(EventID.NextLevelButton_Clicked, loadNextLevel);
         }
 
         public void LoadHighestLevel()
         {
-            //Craft
+            //Craft logic
             LoadLevel(1);
         }
 
@@ -85,7 +94,7 @@ namespace BullBrukBruker
 
         private IEnumerator C_LoadLevel(int index)
         {
-            PS_SceneManager.Instance.SetLoading();
+            IsLoading = true;
 
             CurrentIndex = index;
 
@@ -95,24 +104,39 @@ namespace BullBrukBruker
 
             yield return new WaitForSecondsRealtime(.5f);
 
-            PS_SceneManager.Instance.ResetLoading();
+            IsLoading = false;
 
             LoadAttemps();
         }
 
         private IEnumerator C_LoadLevelObjects()
         {
-            CurrentPaddle = CurrentPaddle != null ? CurrentPaddle : Instantiate(PaddlePrefab).GetComponent<PaddelController>();
-            CurrentPaddle.InitPaddle();
+            LoadPaddel();
 
             yield return null;
 
+            LoadBalls();
+
+            yield return null;
+
+            LoadItem();
+        }
+
+        private void LoadPaddel()
+        {
+            CurrentPaddle = CurrentPaddle != null ? CurrentPaddle : Instantiate(PaddlePrefab).GetComponent<PaddelController>();
+            CurrentPaddle.InitPaddle();
+        }
+
+        private void LoadBalls()
+        {
             CurrentBalls ??= new();
             CurrentBalls.ForEach(ball => ball.SetActive(false));
             CurrentBalls.Clear();
+        }
 
-            yield return null;
-
+        private void LoadItem()
+        {
             CurrentItems ??= new();
             CurrentItems.ForEach(item => item.SetActive(false));
             CurrentItems.Clear();
@@ -131,7 +155,10 @@ namespace BullBrukBruker
             var currentLevelRecord = levelConfig.GetRecord(index);
 
             if (currentLevelRecord == null)
-                GameManager.Instance.ReloadGame(2);
+            {
+                Observer.PostEvent(EventID.OutOfLevels, null);
+                yield break;
+            }
 
             GridManager.Instance.InitGridCells(currentLevelRecord.Cells);
         }
@@ -148,7 +175,16 @@ namespace BullBrukBruker
             CurrentBalls.Remove(ballRemoved);
 
             if (CurrentBalls.Count == 0)
-                Observer.PostEvent(EventID.OutOfBalls, --RemainAttemps);
+                HandleOutOfBalls();
+        }
+
+        private void HandleOutOfBalls()
+        {
+            RemainAttemps--;
+
+            Observer.PostEvent(EventID.OutOfBalls, RemainAttemps);            
+            if (RemainAttemps > 0)
+                LoadItem();
         }
         
         public void AddItem(GameObject item) => CurrentItems.Add(item);

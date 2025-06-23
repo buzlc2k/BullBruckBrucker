@@ -5,6 +5,7 @@ namespace BullBrukBruker
 {
     public class OverState : BaseGameState
     {
+
         public OverState(GameManager gameManager, ISMContext<GameStateID> context) : base(gameManager, context)
         {
             id = GameStateID.Over;
@@ -23,6 +24,12 @@ namespace BullBrukBruker
             while (true)
             {
                 if (PS_SceneManager.Instance.IsLoading)
+                {
+                    context.ChangeState(GameStateID.Load);
+                    yield break;
+                }
+
+                if (LevelManager.Instance.IsLoading)
                 {
                     context.ChangeState(GameStateID.Load);
                     yield break;

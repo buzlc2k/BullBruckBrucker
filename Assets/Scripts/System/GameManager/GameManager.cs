@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,11 +10,44 @@ namespace BullBrukBruker
         private BaseSMState<GameStateID> currentState;
         Dictionary<GameStateID, BaseSMState<GameStateID>> states;
 
+        private Action<object> reloadGame;
+
         public GameStateID PreviousStateID { get; set; }
         public GameStateID CurrentStateID { get; set; }
 
         BaseSMState<GameStateID> ISMContext<GameStateID>.CurrentState { get => currentState; set => currentState = value; }
         Dictionary<GameStateID, BaseSMState<GameStateID>> ISMContext<GameStateID>.States { get => states; set => states = value; }
+
+        private void OnEnable()
+        {
+            InitializeDelegate();
+            RegisterEvent();
+        }
+
+        private void OnDisable()
+        {
+            UnRegisterEvent();
+        }
+
+        private void InitializeDelegate()
+        {
+            reloadGame ??= (param) =>
+            {
+                ReloadGame();
+            };
+        }
+
+        private void RegisterEvent()
+        {
+            Observer.AddListener(EventID.HomeButton_Clicked, reloadGame);
+            Observer.AddListener(EventID.OutOfLevels, reloadGame);
+        }
+
+        private void UnRegisterEvent()
+        {
+            Observer.RemoveListener(EventID.HomeButton_Clicked, reloadGame);
+            Observer.RemoveListener(EventID.OutOfLevels, reloadGame);
+        }
 
         public IEnumerator InitGameManager()
         {

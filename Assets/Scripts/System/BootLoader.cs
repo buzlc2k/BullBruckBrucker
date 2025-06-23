@@ -43,6 +43,11 @@ namespace BullBrukBruker
                                         .ToList()
                                         .ForEach(instance => Destroy(instance.gameObject));
 
+            yield return null;
+
+            foreach (Transform child in transform)
+                child.gameObject.SetActive(true);
+
             DontDestroyOnLoad(this);
             yield return null;
         }
