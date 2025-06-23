@@ -1,0 +1,4 @@
+Type,Field1,Field2,Field3,Field4
+ParentRecord,1,2,,
+Child1Record,2,2,3,
+Child2Record,3,2,,"4, 5, 6, 7"

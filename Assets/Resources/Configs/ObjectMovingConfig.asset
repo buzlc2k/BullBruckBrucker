@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4586660797d5184795e74271987f8b8, type: 3}
+  m_Name: ObjectMovingConfig
+  m_EditorClassIdentifier: 
+  Records:
+  - rid: 1542228041141846082
+  - rid: 1542228041141846083
+  - rid: 1542228041141846087
+  references:
+    version: 2
+    RefIds:
+    - rid: 1542228041141846082
+      type: {class: ObjectMovingConfigRecord, ns: BullBrukBruker, asm: Assembly-CSharp}
+      data:
+        ID: 1
+        Speed: 7.5
+    - rid: 1542228041141846083
+      type: {class: ObjectMovingConfigRecord, ns: BullBrukBruker, asm: Assembly-CSharp}
+      data:
+        ID: 2
+        Speed: 50
+    - rid: 1542228041141846087
+      type: {class: ObjectMovingConfigRecord, ns: BullBrukBruker, asm: Assembly-CSharp}
+      data:
+        ID: 3
+        Speed: 1

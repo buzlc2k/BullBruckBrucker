@@ -1,0 +1,7 @@
+Type,ID,CollisionableIDs,Width,Height,AddedBouncePerAngle
+BallCollisionConfigRecord,1,0.095,0.095,45
+ObjectCollisionConfigRecord,2,0.75,0.095
+ObjectCollisionConfigRecord,3,0.115,0.115
+ObjectCollisionConfigRecord,4,20,0.5
+ObjectCollisionConfigRecord,5,0.5,20
+ObjectCollisionConfigRecord,6,20,0.5
