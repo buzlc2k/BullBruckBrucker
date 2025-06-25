@@ -68,5 +68,12 @@ namespace BullBrukBruker
         ReplayButton_Clicked,
         HomeButton_Clicked,
         NextLevelButton_Clicked,
+        LevelProgressData_Changed,
+    }
+
+    public enum DataID
+    {
+        None,
+        LevelProgress
     }
 }
