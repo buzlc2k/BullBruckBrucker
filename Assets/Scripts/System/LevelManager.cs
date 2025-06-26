@@ -16,32 +16,15 @@ namespace BullBrukBruker
         public List<GameObject> CurrentItems { get; private set; }
         public List<GameObject> CurrentBalls { get; private set; }
 
-        private Action<object> loadHighestLevel;
-        private Action<object> reloadLevel;
+        private Action<object> loadCurrentLevel;
         private Action<object> loadLevel;
         private Action<object> loadNextLevel;
 
-        private void InitializeDelegate()
+        public IEnumerator InitLevelManager()
         {
-            loadHighestLevel ??= (param) =>
-            {
-                LoadHighestLevel();
-            };
+            CurrentIndex = DataManager.Instance.GetCurrentLevel();
 
-            reloadLevel ??= (param) =>
-            {
-                ReloadLevel();
-            };
-
-            loadLevel ??= (param) =>
-            {
-                LoadLevel((int)param);
-            };
-
-            loadNextLevel ??= (param) =>
-            {
-                LoadNextLevel();
-            };
+            yield return null;
         }
 
         private void OnEnable()
@@ -55,29 +38,41 @@ namespace BullBrukBruker
             UnRegisterEvent();
         }
 
+        private void InitializeDelegate()
+        {
+            loadCurrentLevel ??= (param) =>
+            {
+                LoadCurrentLevel();
+            };
+
+            loadLevel ??= (param) =>
+            {
+                LoadLevel((int)param);
+            };
+
+            loadNextLevel ??= (param) =>
+            {
+                LoadNextLevel();
+            };
+        }
+
         private void RegisterEvent()
         {
-            Observer.AddListener(EventID.PlayButton_Clicked, loadHighestLevel);
+            Observer.AddListener(EventID.PlayButton_Clicked, loadCurrentLevel);
             Observer.AddListener(EventID.LevelButton_Clicked, loadLevel);
-            Observer.AddListener(EventID.ReplayButton_Clicked, reloadLevel); 
+            Observer.AddListener(EventID.ReplayButton_Clicked, loadCurrentLevel); 
             Observer.AddListener(EventID.NextLevelButton_Clicked, loadNextLevel);
         }
 
         private void UnRegisterEvent()
         {
-            Observer.RemoveListener(EventID.PlayButton_Clicked, loadHighestLevel);
+            Observer.RemoveListener(EventID.PlayButton_Clicked, loadCurrentLevel);
             Observer.RemoveListener(EventID.LevelButton_Clicked, loadLevel);
-            Observer.RemoveListener(EventID.ReplayButton_Clicked, reloadLevel);
+            Observer.RemoveListener(EventID.ReplayButton_Clicked, loadCurrentLevel);
             Observer.RemoveListener(EventID.NextLevelButton_Clicked, loadNextLevel);
         }
 
-        public void LoadHighestLevel()
-        {
-            //Craft logic
-            LoadLevel(1);
-        }
-
-        public void ReloadLevel()
+        public void LoadCurrentLevel()
         {
             LoadLevel(CurrentIndex);
         }
@@ -96,7 +91,8 @@ namespace BullBrukBruker
         {
             IsLoading = true;
 
-            CurrentIndex = index;
+            if (!TryPrepareLevel(index))
+                yield break;
 
             yield return StartCoroutine(C_LoadLevelObjects());
 
@@ -107,6 +103,39 @@ namespace BullBrukBruker
             IsLoading = false;
 
             LoadAttemps();
+        }
+
+        private bool TryPrepareLevel(int index)
+        {
+            var totalLevels = ConfigsManager.Instance.LevelConfig.GetTotalLevels();
+            
+            return index switch
+            {
+                var i when i > totalLevels => HandleOutOfLevels(),
+                var i => ProcessValidLevel(i)
+            };
+        }
+
+        private bool HandleOutOfLevels()
+        {
+            Observer.PostEvent(EventID.OutOfLevels, null);
+            DataManager.Instance.AddStarsPerLevel(RemainAttemps);
+            return false;
+        }
+
+        private bool ProcessValidLevel(int index)
+        {
+            CurrentIndex = index;
+            var dataManager = DataManager.Instance;
+            
+            if (CurrentIndex > dataManager.GetHighestLevel())
+            {
+                dataManager.WriteHighestLevel(CurrentIndex);
+                dataManager.AddStarsPerLevel(RemainAttemps);
+            }
+            
+            dataManager.WriteCurrentLevel(CurrentIndex);
+            return true;
         }
 
         private IEnumerator C_LoadLevelObjects()
@@ -152,15 +181,7 @@ namespace BullBrukBruker
                 yield return null;
             }
 
-            var currentLevelRecord = levelConfig.GetRecord(index);
-
-            if (currentLevelRecord == null)
-            {
-                Observer.PostEvent(EventID.OutOfLevels, null);
-                yield break;
-            }
-
-            GridManager.Instance.InitGridCells(currentLevelRecord.Cells);
+            GridManager.Instance.InitGridCells(levelConfig.GetRecord(index).Cells);
         }
 
         private void LoadAttemps() => RemainAttemps = 3;

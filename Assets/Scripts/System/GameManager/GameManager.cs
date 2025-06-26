@@ -29,6 +29,14 @@ namespace BullBrukBruker
             UnRegisterEvent();
         }
 
+        public IEnumerator InitGameManager()
+        {
+            InitializeStates();
+
+            ((ISMContext<GameStateID>)this).ChangeState(GameStateID.Load);
+            yield return null;
+        }
+
         private void InitializeDelegate()
         {
             reloadGame ??= (param) =>
@@ -47,14 +55,6 @@ namespace BullBrukBruker
         {
             Observer.RemoveListener(EventID.HomeButton_Clicked, reloadGame);
             Observer.RemoveListener(EventID.OutOfLevels, reloadGame);
-        }
-
-        public IEnumerator InitGameManager()
-        {
-            InitializeStates();
-
-            ((ISMContext<GameStateID>)this).ChangeState(GameStateID.Load);
-            yield return null;
         }
 
         public void InitializeStates()

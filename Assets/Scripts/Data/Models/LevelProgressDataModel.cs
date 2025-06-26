@@ -5,7 +5,6 @@ namespace BullBrukBruker
         public LevelProgressDataModel()
         {
             dataKey = DataKeys.LevelProgressKey;
-            LoadData();
         }
 
         protected override LevelProgressDTO CreateDefaultData()

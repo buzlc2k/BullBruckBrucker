@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,17 +8,15 @@ namespace BullBrukBruker
     {
         private Dictionary<DataID, IDataModel> dataModels;
 
-        public DataModelManager()
-        {
-            LoadDataModels();
-        }
-
-        private void LoadDataModels()
+        public IEnumerator LoadModels()
         {
             dataModels = new()
             {
                 { DataID.LevelProgress, new LevelProgressDataModel() },
             };
+
+            foreach (var model in dataModels.Values)
+                yield return DataManager.Instance.StartCoroutine(model.LoadData());
         }
 
         public IDataModel GetDataModel(DataID dataID)

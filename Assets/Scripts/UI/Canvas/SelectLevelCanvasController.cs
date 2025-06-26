@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,28 +11,31 @@ namespace BullBrukBruker{
 
         public override IEnumerator InitCanvas()
         {
-            var (currentHighestLevel, totalLevel) = GetLevelsData();
+            var (currentHighestLevel, totalLevel, starsPerLevel) = GetLevelsData();
 
             ResizeLevelButtonGrid(totalLevel);
-            CanvasManager.Instance.StartCoroutine(GenerateLevelButton(currentHighestLevel, totalLevel));
+            CanvasManager.Instance.StartCoroutine(GenerateLevelButton(currentHighestLevel, totalLevel, starsPerLevel));
             yield return null;
         }
 
-        private (int currentHighestLevel, int totalLevel) GetLevelsData()
+        private (int currentHighestLevel, int totalLevel, List<int> starsPerLevel) GetLevelsData()
         {
-            //Craft logic
-            int currentHighestLevel = 1;
-            int totalLevel = 50;
+            int currentHighestLevel = DataManager.Instance.GetHighestLevel();
+            int totalLevel = ConfigsManager.Instance.LevelConfig.GetTotalLevels();
+            List<int> starsPerLevel = DataManager.Instance.GetStarsPerLevel();
 
-            return (currentHighestLevel, totalLevel);
+            return (currentHighestLevel, totalLevel, starsPerLevel);
         }
 
-        private IEnumerator GenerateLevelButton(int currentHighestLevel, int totalLevel)
+        private IEnumerator GenerateLevelButton(int currentHighestLevel, int totalLevel, List<int> starsPerLevel)
         {
             for (int i = 1; i <= totalLevel; i++)
             {
                 LevelButtonController button = Instantiate(levelButtonPrefab.GetComponent<LevelButtonController>(), levelButtonGrid);
-                button.SetIndexForButton(i, i <= currentHighestLevel);
+
+                int numStars = i - 1 < starsPerLevel.Count ? starsPerLevel[i - 1] : 0;
+                button.SetIndexForButton(i, i <= currentHighestLevel, numStars);
+
                 yield return null;
             }
         }

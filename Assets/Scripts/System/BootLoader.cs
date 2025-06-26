@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -13,7 +12,7 @@ namespace BullBrukBruker
 
             //Configs = ConfigManager 
 
-            //Load Player's Data
+            yield return StartCoroutine(InitDataManager());
 
             yield return StartCoroutine(InitScreenManager());
 
@@ -50,6 +49,18 @@ namespace BullBrukBruker
 
             DontDestroyOnLoad(this);
             yield return null;
+        }
+
+        private IEnumerator InitDataManager()
+        {
+            Debug.Log("====== START INIT DATA MANAGER ======");
+
+            while (DataManager.Instance == null)
+                yield return null;
+
+            StartCoroutine(DataManager.Instance.InitDataManager());
+
+            Debug.Log("====== INIT DATA MANAGER DONE ======");
         }
 
         private IEnumerator InitScreenManager()
@@ -116,6 +127,8 @@ namespace BullBrukBruker
 
             while (LevelManager.Instance == null)
                 yield return null;
+            
+            yield return StartCoroutine(LevelManager.Instance.InitLevelManager());
 
             Debug.Log("====== INIT LEVEL MANAGER DONE ======");
         }

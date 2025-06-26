@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Collections;
 
 namespace BullBrukBruker
 {
@@ -12,15 +13,20 @@ namespace BullBrukBruker
 
         protected abstract DTO CreateDefaultData();
 
-        public virtual void LoadData()
+        public virtual IEnumerator LoadData()
         {
-            string jsonString = SaveSystem.HasKey(dataKey)
+            while (data == null)
+            {
+                string jsonString = SaveSystem.HasKey(dataKey)
                     ? SaveSystem.GetString(dataKey)
                     : null;
 
-            data = !string.IsNullOrEmpty(jsonString)
-                    ? JsonUtility.FromJson<DTO>(jsonString)
-                    : CreateDefaultData();
+                data = !string.IsNullOrEmpty(jsonString)
+                        ? JsonUtility.FromJson<DTO>(jsonString)
+                        : CreateDefaultData();
+
+                yield return null;
+            }
         }   
 
         public virtual T Read<T>(Expression<Func<object, T>> fieldSelector)
@@ -33,10 +39,9 @@ namespace BullBrukBruker
         public virtual void Write<T>(Expression<Func<object, T>> fieldSelector, T overridedValue)
         {
             if (fieldSelector.Body is MemberExpression memberExpression
-                && memberExpression.Member is PropertyInfo propertyInfo
-                && propertyInfo.CanWrite)
+                && memberExpression.Member is FieldInfo fieldInfo)
             {
-                propertyInfo.SetValue(data, overridedValue);
+                fieldInfo.SetValue(data, overridedValue);
             }
         }
         

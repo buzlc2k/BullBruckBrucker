@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,17 +8,18 @@ namespace BullBrukBruker{
     {        
         private int levelIndex;
         [SerializeField] private TextMeshProUGUI levelIndexText;
+        [SerializeField] private StarImagesContainerController starImagesContainer;
         [SerializeField] private Image buttonImage;
 
-        public void SetIndexForButton(int levelIndex, bool available)
+        public void SetIndexForButton(int levelIndex, bool available, int num)
         {
             this.levelIndex = levelIndex;
             levelIndexText.text = $"{levelIndex}";
 
-            if (available) buttonImage.color = Color.white;
-            else buttonImage.color = Color.grey;
-
+            buttonImage.color = available ? Color.white : Color.grey;
             button.interactable = available;
+
+            starImagesContainer.ActiveStars(num);
         }
 
         protected override void OnClick()
