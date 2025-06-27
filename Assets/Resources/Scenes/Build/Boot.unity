@@ -1146,7 +1146,7 @@ GameObject:
   - component: {fileID: 419236753}
   - component: {fileID: 419236752}
   m_Layer: 5
-  m_Name: SettingButton
+  m_Name: RankingButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2659,7 +2659,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &829561508
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4218,7 +4218,7 @@ GameObject:
   - component: {fileID: 1130050701}
   - component: {fileID: 1130050700}
   m_Layer: 5
-  m_Name: ShopButton
+  m_Name: SettingButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5895,10 +5895,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 419236751}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.108, y: 0.10700001}
-  m_AnchorMax: {x: 0.892, y: 0.89300007}
-  m_AnchoredPosition: {x: 0.000015258789, y: 0}
-  m_SizeDelta: {x: 0.7312927, y: 0.7312927}
+  m_AnchorMin: {x: 0.186, y: 0.155}
+  m_AnchorMax: {x: 0.814, y: 0.845}
+  m_AnchoredPosition: {x: 0.000015258789, y: -0.0000076293945}
+  m_SizeDelta: {x: -0.11470032, y: -0.12420082}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1408323940
 MonoBehaviour:
@@ -5920,7 +5920,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -8774581211139035160, guid: 2907a5d475d217a4894d96e62e096b99, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6f7f5a82bb40c6a4fa3fe698e6dd8108, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7207,7 +7207,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 9139999353004132567, guid: 2907a5d475d217a4894d96e62e096b99, type: 3}
+  m_Sprite: {fileID: -1331415390525029682, guid: 2907a5d475d217a4894d96e62e096b99, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7575,10 +7575,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1130050699}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.24654655, y: 0.32700002}
-  m_AnchorMax: {x: 0.75154656, y: 0.67231613}
-  m_AnchoredPosition: {x: 0.8823242, y: 0.07331848}
-  m_SizeDelta: {x: 0.02709961, y: -0.51860046}
+  m_AnchorMin: {x: 0.18765754, y: 0.28500003}
+  m_AnchorMax: {x: 0.81268495, y: 0.71435297}
+  m_AnchoredPosition: {x: -0.11047363, y: 0.07308197}
+  m_SizeDelta: {x: 0.6133995, y: -0.89990044}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1832643219
 MonoBehaviour:
@@ -7600,7 +7600,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Shop
+  m_text: 'Setting
 
 '
   m_isRightToLeft: 0
