@@ -173,11 +173,12 @@ namespace BullBrukBruker
         {
             var inDirection = bounceDir;
             var inNormal = GetCollisionNormal(bouncePos, staticObjectPos, staticObjectWidth, staticObjectHeight);
-            
+
             return Vector3.Reflect(inDirection, inNormal);
         }
 
-        public static void StartSafeCourotine(MonoBehaviour starter, IEnumerator routine) {
+        public static void StartSafeCourotine(MonoBehaviour starter, IEnumerator routine)
+        {
             if (starter != null && starter.gameObject.activeInHierarchy)
                 starter.StartCoroutine(routine);
         }

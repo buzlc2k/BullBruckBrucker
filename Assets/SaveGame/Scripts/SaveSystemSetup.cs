@@ -14,8 +14,8 @@ public class SaveSystemSetup : MonoBehaviour {
 
     // if the object is present in all game scenes, auto save before exiting
     // on some platforms there may not be an exit function, see the Unity help
-    void OnApplicationQuit()
-	{
-		SaveSystem.SaveToDisk();
-	}
+    // void OnApplicationQuit()
+	// {
+	// 	SaveSystem.SaveToDisk();
+	// }
 }

@@ -9,6 +9,6 @@ namespace BullBrukBruker
         public IEnumerator LoadData();
         public T Read<T>(Expression<Func<object, T>> fieldSelector);
         public void Write<T>(Expression<Func<object, T>> fieldSelector, T overridedValue);
-        public void SaveData();
+        public IEnumerator SaveData();
     }
 }

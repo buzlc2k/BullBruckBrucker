@@ -1,10 +1,14 @@
+using Firebase.Database;
+
 namespace BullBrukBruker
 {
     public class LevelProgressDataModel : DataModel<LevelProgressDTO>
     {
-        public LevelProgressDataModel()
+        public LevelProgressDataModel(string userID)
         {
-            dataKey = DataKeys.LevelProgressKey;
+            dataNode = DataNodes.LevelProgressKey;
+            this.userID = userID;
+            dbRef = FirebaseDatabase.DefaultInstance.RootReference.Child(dataNode).Child(userID);
         }
 
         protected override LevelProgressDTO CreateDefaultData()
@@ -13,7 +17,7 @@ namespace BullBrukBruker
             {
                 CurrentLevel = 1,
                 HighestLevel = 1,
-                StarsPerLevel = new(),
+                StarsPerLevel = new(){0},
             };
         }
     }

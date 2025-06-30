@@ -33,7 +33,7 @@ namespace BullBrukBruker{
             {
                 LevelButtonController button = Instantiate(levelButtonPrefab.GetComponent<LevelButtonController>(), levelButtonGrid);
 
-                int numStars = i - 1 < starsPerLevel.Count ? starsPerLevel[i - 1] : 0;
+                int numStars = i < starsPerLevel.Count ? starsPerLevel[i] : 0;
                 button.SetIndexForButton(i, i <= currentHighestLevel, numStars);
 
                 yield return null;

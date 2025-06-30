@@ -7,21 +7,7 @@ namespace BullBrukBruker
     public class DataManager : SingletonMono<DataManager>
     {
         private DataModelManager dataModelManager;
-
-        private void OnDestroy()
-        {
-            SaveAllData();
-        }
-
-        private void OnApplicationPause(bool pauseStatus)
-        {
-            SaveAllData();
-        }
-
-        private void OnApplicationQuit() {
-            SaveAllData();
-        }
-
+        
         public IEnumerator InitDataManager()
         {
             dataModelManager = new();
@@ -60,8 +46,5 @@ namespace BullBrukBruker
         }
 
         #endregion
-
-        private void SaveAllData()
-            => dataModelManager.SaveAll();
     }
 }

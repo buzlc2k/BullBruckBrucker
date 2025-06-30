@@ -11,7 +11,7 @@ namespace BullBrukBruker{
         [SerializeField] private StarImagesContainerController starImagesContainer;
         [SerializeField] private Image buttonImage;
 
-        public void SetIndexForButton(int levelIndex, bool available, int num)
+        public void SetIndexForButton(int levelIndex, bool available, int numStart)
         {
             this.levelIndex = levelIndex;
             levelIndexText.text = $"{levelIndex}";
@@ -19,7 +19,7 @@ namespace BullBrukBruker{
             buttonImage.color = available ? Color.white : Color.grey;
             button.interactable = available;
 
-            starImagesContainer.ActiveStars(num);
+            starImagesContainer.ActiveStars(numStart);
         }
 
         protected override void OnClick()

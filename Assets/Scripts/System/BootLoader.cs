@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -30,7 +32,7 @@ namespace BullBrukBruker
 
             Debug.Log("====== DONE PROCESS ======");
 
-            StartCoroutine(PS_SceneManager.Instance.LoadScene("Gameplay", 3));
+            StartCoroutine(PS_SceneManager.Instance.LoadScene("Gameplay", 2));
         }
 
         private IEnumerator InitBootLoader()
@@ -58,7 +60,7 @@ namespace BullBrukBruker
             while (DataManager.Instance == null)
                 yield return null;
 
-            StartCoroutine(DataManager.Instance.InitDataManager());
+            yield return StartCoroutine(DataManager.Instance.InitDataManager());
 
             Debug.Log("====== INIT DATA MANAGER DONE ======");
         }
@@ -82,7 +84,7 @@ namespace BullBrukBruker
             while (PS_SceneManager.Instance == null)
                 yield return null;
 
-            StartCoroutine(PS_SceneManager.Instance.InitSceneManager());
+            yield return StartCoroutine(PS_SceneManager.Instance.InitSceneManager());
 
             Debug.Log("====== INIT SCENE MANAGER DONE ======");
         }
